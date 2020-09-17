@@ -11,9 +11,6 @@ class MainCubit extends Cubit<MainState> {
 
   void GetContentFromWeb(String url){
     _resosibility.getInfoComicFromUrl(url);
-
-
-
   }
 }
 

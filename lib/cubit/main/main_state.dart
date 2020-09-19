@@ -10,3 +10,16 @@ class MainInitial extends MainState {
   @override
   List<Object> get props => [defaultUrl];
 }
+class MainLoading extends MainState{
+
+  const MainLoading();
+  @override
+  List<Object> get props => [];
+}
+class MainLoaded extends MainState{
+  final Comic comic;
+
+  const MainLoaded(this.comic);
+  @override
+  List<Object> get props => [comic];
+}

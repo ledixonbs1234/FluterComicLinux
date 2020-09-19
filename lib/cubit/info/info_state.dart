@@ -5,14 +5,14 @@ abstract class InfoState extends Equatable {
 }
 
 class InfoInitial extends InfoState {
+  const InfoInitial();
   @override
   List<Object> get props => [];
 }
-class InfoLoadded extends InfoState{
-  final String content;
-  const InfoLoadded({@required this.content}):assert(content!=null);
+class InfoLoaded extends InfoState{
+  final Comic comic;
+  const InfoLoaded({@required this.comic}):assert(comic!=null);
 
   @override
-  // TODO: implement props
-  List<Object> get props => [content];
+  List<Object> get props => [comic];
 }

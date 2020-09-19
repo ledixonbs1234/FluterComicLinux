@@ -8,38 +8,28 @@ class MainResosibility {
     var res =await http.get(url);
     if(res.statusCode == 200){
       String content = res.body.toString();
-      ExcuteContentAndGet(content);
+      return excuteContentAndGet(content);
     }
+    return null;
   }
 
-  Comic ExcuteContentAndGet(String content){
+  Comic excuteContentAndGet(String content){
     String cumNhoReg = r'item-detail(\W|\w)+?article';
     String cumNhoContent = RegExp(cumNhoReg).stringMatch(content);
-    Comic comic = GetPhanInfo(cumNhoContent);
-    comic.chapters = GetChapter(cumNhoContent);
+    Comic comic = getPhanInfo(cumNhoContent);
+    comic.chapters = getChapter(cumNhoContent);
     return comic;
   }
 
-  Comic GetPhanInfo(String content){
+  Comic getPhanInfo(String content){
     String childReg =r'title(\w|\W)+?>((\w|\W)+?)<(\w|\W)+?src="((\w|\W)+?)"(\w|\W)+?Tình trạng(\w|\W)+?">((\w|\W)+?)<(\W|\w)+?Lượt xem(\W|\w)+?">((\W|\w)+?)<(\W|\w)+?href="((\W|\w)+?)"(\W|\w)+?Nội dung(\W|\w)+?<p>((\W|\w)+?)<\/p>';
     final regex = RegExp(childReg).firstMatch(content);
-    //ten
-    regex.group(2);
-    //img
-    regex.group(5);
-    //tinh trang
-    regex.group(9);
-    //luot xem
-    regex.group(13);
-    //url
-    regex.group(16);
-    //noi dung
-    regex.group(20);
+
     return Comic(ten: regex.group(2),imagePath: regex.group(5),
         tinhTrang: regex.group(9),luotXem: regex.group(13),url: regex.group(16),noiDung: regex.group(20));
   }
 
-  List<Chapter> GetChapter(String content){
+  List<Chapter> getChapter(String content){
     var regex = RegExp(r' chapter">(\W|\w)+?href="((\W|\w)+?)"(\W|\w)+?(\W|\w)+?">((\W|\w)+?)<(\W|\w)+?small">((\W|\w)+?)<(\W|\w)+?small">((\W|\w)+?)<').allMatches(content);
     List<Chapter> chapters = new List<Chapter>();
     regex.forEach((element) {
